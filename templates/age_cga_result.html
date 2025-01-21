@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #dfdfe5;
+        }
+        form {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            background: rgb(243, 242, 246);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .form-column {
+            flex: 1 1 calc(33.33% - 20px); /* Adjusting to show 3 fields per row */
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px; /* Space between label and input */
+        }
+        .form-group label {
+            flex: 1;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select {
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #e9f5e9;
+            border-radius: 8px;
+            border: 1px solid #d4edd4;
+        }
+        .results h2 {
+            color: #3c763d;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Nutrition Calculator</h1>
+    <form id="nutrition-form">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-column form-group">
+                <label for="today">Date:</label>
+                <input type="date" id="today" name="today">
+            </div>
+            <div class="form-column form-group">
+                <label for="tpn-ml-hour">TPN (ml/hour):</label>
+                <input type="number" id="tpn-ml-hour" name="tpn_ml_per_hour" placeholder="ml/hour">
+            </div>
+            <div class="form-column form-group">
+                <label for="tpn-ml-kg-day">TPN (ml/kg/day):</label>
+                <input type="number" id="tpn-ml-kg-day" name="tpn_ml_per_kg_day" placeholder="ml/kg/day">
+            </div>
+            <div class="form-column form-group">
+                <label for="lipids-ml-hour">Lipids (ml/hour):</label>
+                <input type="number" id="lipids-ml-hour" name="lipids_ml_per_hour" placeholder="ml/hour">
+            </div>
+            <div class="form-column form-group">
+                <label for="fluid-type">Fluid Type:</label>
+                <select id="fluid-type" name="maintenance_fluid_type">
+                    <option value="5% dextrose">5% dextrose</option>
+                    <option value="10% dextrose">10% dextrose</option>
+                    <option value="12.5% dextrose">12.5% dextrose</option>
+                    <option value="15% dextrose">15% dextrose</option>
+                    <option value="20% dextrose">20% dextrose</option>
+                </select>
+            </div>
+            <div class="form-column form-group">
+                <label for="maintenance-ml-hour">Maintenance Fluid (ml/hour):</label>
+                <input type="number" id="maintenance-ml-hour" name="maintenance_ml_per_hour" placeholder="ml/hour">
+            </div>
+            <div class="form-column form-group">
+                <label for="maintenance-ml-kg-day">Maintenance Fluid (ml/kg/day):</label>
+                <input type="number" id="maintenance-ml-kg-day" name="maintenance_ml_per_kg_day" placeholder="ml/kg/day">
+            </div>
+            <div class="form-column form-group">
+                <label for="working-weight">Working Weight (g):</label>
+                <input type="number" id="working-weight" name="working_weight" placeholder="grams">
+            </div>
+            <div class="form-column form-group">
+                <label for="total-fluid-intake">Fluid Intake (ml):</label>
+                <input type="number" id="total-fluid-intake" name="total_fluid_intake" placeholder="ml">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-column form-group">
+                <label for="feed-amount">Feed Amount (ml):</label>
+                <input type="number" id="feed-amount" name="feed_amount_ml" placeholder="ml">
+            </div>
+            <div class="form-column form-group">
+                <label for="enteral-feed">Enteral Feed Type:</label>
+                <select id="enteral-feed" name="enteral_feed">
+                    <option value="EBM">EBM</option>
+                    <option value="EBM with fortification">EBM with fortification</option>
+                    <option value="Term formula">Term formula</option>
+                    <option value="GP1 preterm formula">GP1 preterm formula</option>
+                    <option value="GP2 preterm formula">GP2 preterm formula</option>
+                    <option value="SMA high energy">SMA high energy</option>
+                    <option value="Infatrini peptisorb">Infatrini peptisorb</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="button" id="calculate-button">Calculate</button>
+    </form>
+
+    <div class="results" id="results" style="display: none;">
+        <h2>Calculation Results</h2>
+        <pre id="results-content"></pre>
+    </div>
+
+    <p class="error" id="error-message"></p>
+
+<script>
+    document.getElementById("calculate-button").addEventListener("click", function () {
+    const form = document.getElementById("nutrition-form");
+    const formData = new FormData(form);
+
+    fetch(form.action || window.location.href, {
+        method: "POST",
+        body: formData,
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("An error occurred while processing the request.");
+            }
+            return response.text(); // Use text() instead of json()
+        })
+        .then(html => {
+            document.getElementById("results").style.display = "block";
+            document.getElementById("results-content").innerHTML = html; // Display the HTML response
+            document.getElementById("error-message").textContent = "";
+        })
+        .catch(error => {
+            document.getElementById("results").style.display = "none";
+            document.getElementById("error-message").textContent = error.message;
+        });
+});
+
+    </script>
+</body>
+</html>

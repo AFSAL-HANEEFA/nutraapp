@@ -1,0 +1,347 @@
+
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+       <!-- Meta Tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="keywords" content="Site keywords here">
+<meta name="description" content="">
+<meta name='copyright' content=''>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Title -->
+<title>Nutrition calculator</title>
+
+<!-- Favicon -->
+<link rel="icon" href="{% static 'img/lo.png' %}">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!-- Nice Select CSS -->
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<!-- icofont CSS -->
+<link rel="stylesheet" href="{% static 'css/icofont.css' %}">
+<!-- Slicknav -->
+<link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+<!-- Owl Carousel CSS -->
+<link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}">
+<!-- Datepicker CSS -->
+<link rel="stylesheet" href="{% static 'css/datepicker.css' %}">
+<!-- Animate CSS -->
+<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+<!-- Magnific Popup CSS -->
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+<!-- Medipro CSS -->
+<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</html>
+    <body>
+      
+		<div class="preloader">
+			<div class="loader">
+				<div class="loader-outter"></div>
+				<div class="loader-inner"></div>
+		
+				<div class="indicator"> 
+					<svg width="16px" height="12px">
+						<polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+						<polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+					</svg>
+				</div>
+			</div>
+		</div>
+		<!-- End Preloader -->
+		
+		<!-- Header Area -->
+		<header class="header">
+			<!-- Header Inner -->
+			<div class="header-inner">
+				<div class="container">
+					<div class="inner">
+						<div class="row">
+							<div class="col-lg-3 col-md-3 col-12">
+								<!-- Start Logo -->
+								<div class="logo">
+									<a href="index.html">
+										<img src="{% static 'img/logo.png' %}" alt="Logo">
+									</a>
+								</div>
+								<!-- End Logo -->
+								<!-- Mobile Nav -->
+								<div class="mobile-nav"></div>
+								<!-- End Mobile Nav -->
+							</div>
+							<div class="col-lg-7 col-md-9 col-12">
+								<!-- Main Menu -->
+								<div class="main-menu">
+									<nav class="navigation">
+										<ul class="nav menu">
+											<li class="active">
+												<a href="#">Home <i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													<li><a href="index.html">Home Page 1</a></li>
+												</ul>
+											</li>
+											<li><a href="#">Doctors</a></li>
+											<li><a href="#">Services</a></li>
+											<li>
+												<a href="#">Pages <i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													<li><a href="404.html">404 Error</a></li>
+												</ul>
+											</li>
+											<li>
+												<a href="#">Blogs <i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													<li><a href="blog-single.html">Blog Details</a></li>
+												</ul>
+											</li>
+											<li><a href="contact.html">Contact Us</a></li>
+										</ul>
+									</nav>
+								</div>
+								<!--/ End Main Menu -->
+							</div>
+							<div class="col-lg-2 col-12">
+								<div class="get-quote">
+									<a href="addmission.html" class="btn">Book Admission</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ End Header Inner -->
+		</header>
+<section class="section age-cga-calculation" style="background-color: #f9f9f9; padding: 50px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title" style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="color: #333; font-weight: 700;">Age and CGA Calculator</h2>
+                    <p style="color: #555; font-weight: 500;">Fill out the details below to calculate age, CGA, and calorie intake:</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form id="calculationForm">
+                    <div class="row">
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="today" class="w-50" style="font-weight: 600; color: #333;">Today's Date:</label>
+                            <input type="date" class="form-control w-50" id="today" name="today" value="">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- TPN Inputs -->
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="tpnMlPerHour" class="w-50" style="font-weight: 600; color: #333;">TPN Volume (ml/hour):</label>
+                            <input type="number" class="form-control w-50" id="tpnMlPerHour" name="tpn_ml_per_hour" placeholder="Enter TPN volume in ml/hour">
+                        </div>
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="tpnMlPerKgDay" class="w-50" style="font-weight: 600; color: #333;">TPN Volume (ml/kg/day):</label>
+                            <input type="number" class="form-control w-50" id="tpnMlPerKgDay" name="tpn_ml_per_kg_day" placeholder="Enter TPN volume in ml/kg/day">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Lipids Inputs -->
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="lipidsMlPerHour" class="w-50" style="font-weight: 600; color: #333;">Lipids Volume (ml/hour):</label>
+                            <input type="number" class="form-control w-50" id="lipidsMlPerHour" name="lipids_ml_per_hour" placeholder="Enter lipids volume in ml/hour">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Maintenance Fluid Inputs -->
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="maintenanceFluidType" class="w-50" style="font-weight: 600; color: #333;">Maintenance Fluid Type:</label>
+                            <select class="form-control w-50" id="maintenanceFluidType" name="maintenance_fluid_type">
+                                <option value="5% dextrose">5% Dextrose</option>
+                                <option value="10% dextrose">10% Dextrose</option>
+                                <option value="12.5% dextrose">12.5% Dextrose</option>
+                                <option value="15% dextrose">15% Dextrose</option>
+                                <option value="20% dextrose">20% Dextrose</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="maintenanceMlPerHour" class="w-50" style="font-weight: 600; color: #333;">Maintenance Volume (ml/hour):</label>
+                            <input type="number" class="form-control w-50" id="maintenanceMlPerHour" name="maintenance_ml_per_hour" placeholder="Enter maintenance volume in ml/hour">
+                        </div>
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="maintenanceMlPerKgDay" class="w-50" style="font-weight: 600; color: #333;">Maintenance Volume (ml/kg/day):</label>
+                            <input type="number" class="form-control w-50" id="maintenanceMlPerKgDay" name="maintenance_ml_per_kg_day" placeholder="Enter maintenance volume in ml/kg/day">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Enteral Feed Inputs -->
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="enteralFeed" class="w-50" style="font-weight: 600; color: #333;">Enteral Feed Type:</label>
+                            <select class="form-control w-50" id="enteralFeed" name="enteral_feed">
+                                <option value="EBM">EBM</option>
+                                <option value="EBM with fortification">EBM with Fortification</option>
+                                <option value="Term formula">Term Formula</option>
+                                <option value="GP1 preterm formula">GP1 Preterm Formula</option>
+                                <option value="GP2 preterm formula">GP2 Preterm Formula</option>
+                                <option value="SMA high energy">SMA High Energy</option>
+                                <option value="Infatrini peptisorb">Infatrini Peptisorb</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group d-flex align-items-center">
+                            <label for="feedAmountMl" class="w-50" style="font-weight: 600; color: #333;">Feed Amount (ml):</label>
+                            <input type="number" class="form-control w-50" id="feedAmountMl" name="feed_amount_ml" placeholder="Enter feed amount in ml">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary btn-block">Calculate</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div id="results" class="mt-4" style="display: none;">
+                    <h4 style="font-weight: 700; color: #333;">Calculation Results:</h4>
+                    <pre id="resultsOutput" style="background-color: #f4f4f4; padding: 15px; border: 1px solid #ddd;"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+		<!-- Footer Area -->
+<footer id="footer" class="footer ">
+    <!-- Footer Top -->
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="single-footer">
+                        <h2>About Us</h2>
+                        <p>Lorem ipsum dolor sit am consectetur adipisicing elit do eiusmod tempor incididunt ut labore dolore magna.</p>
+                        <!-- Social -->
+                        <ul class="social">
+                            <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                            <li><a href="#"><i class="icofont-google-plus"></i></a></li>
+                            <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                            <li><a href="#"><i class="icofont-vimeo"></i></a></li>
+                            <li><a href="#"><i class="icofont-pinterest"></i></a></li>
+                        </ul>
+                        <!-- End Social -->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="single-footer f-link">
+                        <h2>Quick Links</h2>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>About Us</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Services</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Our Cases</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Other Links</a></li>	
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Consuling</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Finance</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Testimonials</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>FAQ</a></li>
+                                    <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact Us</a></li>	
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="single-footer">
+                        <h2>Open Hours</h2>
+                        <p>Lorem ipsum dolor sit ame consectetur adipisicing elit do eiusmod tempor incididunt.</p>
+                        <ul class="time-sidual">
+                            <li class="day">Monday - Fridayp <span>8.00-20.00</span></li>
+                            <li class="day">Saturday <span>9.00-18.30</span></li>
+                            <li class="day">Monday - Thusday <span>9.00-15.00</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="single-footer">
+                        <h2>Newsletter</h2>
+                        <p>subscribe to our newsletter to get allour news in your inbox.. Lorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
+                        <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                            <input name="email" placeholder="Email Address" class="common-input" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'Your email address'" required="" type="email">
+                            <button class="button"><i class="icofont icofont-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Footer Top -->
+    
+    
+</footer>
+<!--/ End Footer Area -->
+<!-- jquery Min JS -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!-- jquery Migrate JS -->
+<script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
+<!-- jquery Ui JS -->
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+<!-- Easing JS -->
+<script src="{% static 'js/easing.js' %}"></script>
+<!-- Color JS -->
+<script src="{% static 'js/colors.js' %}"></script>
+<!-- Popper JS -->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap Datepicker JS -->
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<!-- Jquery Nav JS -->
+<script src="{% static 'js/jquery.nav.js' %}"></script>
+<!-- Slicknav JS -->
+<script src="{% static 'js/slicknav.min.js' %}"></script>
+<!-- ScrollUp JS -->
+<script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+<!-- Niceselect JS -->
+<script src="{% static 'js/niceselect.js' %}"></script>
+<!-- Tilt Jquery JS -->
+<script src="{% static 'js/tilt.jquery.min.js' %}"></script>
+<!-- Owl Carousel JS -->
+<script src="{% static 'js/owl-carousel.js' %}"></script>
+<!-- counterup JS -->
+<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+<!-- Steller JS -->
+<script src="{% static 'js/steller.js' %}"></script>
+<!-- Wow JS -->
+<script src="{% static 'js/wow.min.js' %}"></script>
+<!-- Magnific Popup JS -->
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<!-- Counter Up CDN JS -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Main JS -->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

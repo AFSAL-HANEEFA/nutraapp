@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age and CGA Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .result-table th, .result-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .result-table th {
+            background-color: #176bc5;
+            color: white;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Baby Admission and Nutritional Results</h1>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <h2>Results for Baby ID: {{ results.baby.serial_no }}</h2>
+
+    <table class="result-table">
+        <tr>
+            <th>Age in Days</th>
+            <td>{{ results.age_in_days }}</td>
+        </tr>
+        <tr>
+            <th>Age in Weeks</th>
+            <td>{{ results.age_in_weeks }}</td>
+        </tr>
+        <tr>
+            <th>Age in Months</th>
+            <td>{{ results.age_in_months }}</td>
+        </tr>
+        <tr>
+            <th>Corrected Gestational Age</th>
+            <td>{{ results.corrected_gestational_age }}</td>
+        </tr>
+        <tr>
+            <th>TPN Total Volume (mL)</th>
+            <td>{{ results.tpn_total_volume_ml }}</td>
+        </tr>
+        <tr>
+            <th>TPN Calories</th>
+            <td>{{ results.tpn_calories }}</td>
+        </tr>
+        <tr>
+            <th>Lipids (grams)</th>
+            <td>{{ results.lipids_grams }}</td>
+        </tr>
+        <tr>
+            <th>Lipids Calories</th>
+            <td>{{ results.lipids_calories }}</td>
+        </tr>
+        <tr>
+            <th>Maintenance Fluid Type</th>
+            <td>{{ results.maintenance_fluid_type }}</td>
+        </tr>
+        <tr>
+            <th>Maintenance Fluid Volume (mL)</th>
+            <td>{{ results.maintenance_total_volume_ml }}</td>
+        </tr>
+        <tr>
+            <th>Maintenance Calories</th>
+            <td>{{ results.maintenance_calories }}</td>
+        </tr>
+        <tr>
+            <th>Enteral Feed Type</th>
+            <td>{{ results.enteral_feed_type }}</td>
+        </tr>
+        <tr>
+            <th>Enteral Feed Amount (mL)</th>
+            <td>{{ results.feed_amount_ml }}</td>
+        </tr>
+        <tr>
+            <th>Enteral Feed Calories</th>
+            <td>{{ results.feed_calories }}</td>
+        </tr>
+        <tr>
+            <th>Total Fluid Intake (mL)</th>
+            <td>{{ results.total_fluid_intake_ml }}</td>
+        </tr>
+        <tr>
+            <th>Total Calorie Intake</th>
+            <td>{{ results.total_calorie_intake }}</td>
+        </tr>
+        <tr>
+            <th>current_weight_kg</th>
+            <td>{{ results.current_weight_kg }}</td>
+        </tr>
+        <tr>
+            <th>percent_weight_change</th>
+            <td>{{ results.percent_weight_change }}</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
+
